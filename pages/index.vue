@@ -13,6 +13,10 @@ const thisArticlesComments = ref<ArticleComment[]>([]);
 async function submitComment() {}
 
 /**
+ * Imagine this is a news article that has been selected from a site like
+ *
+ *  https://www.bbc.co.uk/news
+ *
  * 1. get the comments for this article via the dummy api call and render them in place of the placeholder comment
  *
  * 2. lets plug in the form to the api call to add a new comment
@@ -20,6 +24,8 @@ async function submitComment() {}
  * 3. render the new comment in the list of comments
  *
  * 4. break the comments into a seperate component
+ *
+ *  https://www.bbc.co.uk/news - lets do a component and data 'breakdown' of this page, if we were going to build it in vue
  *
  * 5. we have magically been granted admin privilages, lets add a delete button to each comment
  */

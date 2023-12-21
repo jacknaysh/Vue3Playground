@@ -54,5 +54,5 @@ export function addNewComment(comment: { name: string; comment: string }) {
 	//worst: an api might return nothing
 	return commentWithDetails;
 	// return comments
-	return { message: "success", id: commentWithDetails.id };
+	return { message: "success", id: commentWithDetails.id };//note: this is the worst case scenario - our solution shouldnt be our go to one, always talk to the backend team, but sometimes you have to do what you have to do
 }
