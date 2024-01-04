@@ -1,16 +1,34 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { Comment } from "vue";
 import {
 	getCommentsById,
 	addNewComment,
 	type ArticleComment, //importing a type
 } from "../requests/article";
+import commentsComponent from "./commentsComponent.vue";
+
+
+
+let showComments = ref(false)
+
+const thisArticlesComments = ref<ArticleComment[]>([]);
+thisArticlesComments.value = getCommentsById(1)
 
 const name = ref("");
 const commentInput = ref("");
-//what is <> for?
-const thisArticlesComments = ref<ArticleComment[]>([]);
+console.log(thisArticlesComments.value)
 
-async function submitComment() {}
+
+
+function uploadComment(){
+	const val = addNewComment({name: name.value, comment: commentInput.value})
+	thisArticlesComments.value.push(val)
+	console.log(thisArticlesComments)
+	console.log(val)
+	name.value = ''
+	commentInput.value = ''
+}
 
 /**
  * Imagine this is a news article that has been selected from a site like
@@ -93,7 +111,7 @@ async function submitComment() {}
 				consequuntur pariatur.
 			</p>
 		</article>
-		<form @submit.prevent="submitComment" class="comment-input-form">
+		<form @submit.prevent class="comment-input-form">
 			<hr />
 
 			<h2>leave a comment:</h2>
@@ -103,12 +121,19 @@ async function submitComment() {}
 			<label for="comment">Comment</label>
 			<textarea type="text" name="comment" v-model="commentInput" />
 			<br />
-			<button type="submit">Submit</button>
+			<button type="submit" @click="uploadComment()">Submit</button>
 			<hr />
 		</form>
 		<div class="comments-section">
-			<h2>Comments:</h2>
-			<div class="comment">
+			<h2 @click="showComments = !showComments">Comments</h2>
+			<div v-if="!showComments">
+				<p>Loading Comments</p>
+			</div> 
+			<div v-else>
+				<commentsComponent />
+			</div>
+
+			<!-- <div class="comment">
 				<div class="comment-header">
 					<h3>Name: name | date</h3>
 				</div>
@@ -121,7 +146,7 @@ async function submitComment() {}
 					dolorum voluptas quae.
 				</p>
 				<hr />
-			</div>
+			</div> -->
 		</div>
 	</main>
 </template>

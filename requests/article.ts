@@ -33,6 +33,7 @@ const comments = [
 ];
 
 export function getCommentsById(id: number) {
+	console.log("comment by id ran")
 	//here we would make a request to our server like GET article/:id/comments/
 	return comments;
 }
@@ -45,7 +46,6 @@ export function addNewComment(comment: { name: string; comment: string }) {
 		date: new Date().toLocaleString(),
 	};
 
-	comments.push(commentWithDetails);
 
 	// an api might behave differently here so lets cover all bases:
 
